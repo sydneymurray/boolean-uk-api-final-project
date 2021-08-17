@@ -7,62 +7,62 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Car {
-  id             Int           @id @default(autoincrement())
-  manufacturer   String        @db.VarChar(255)
-  type           String        @db.VarChar(255)
-  model          String        @db.VarChar(255)
-  mainImageURL   String        @db.VarChar(255)
-  VIN            String        @db.VarChar(255)
-  licence        String        @db.VarChar(255)
+model Owners {
+  id                                                Int            @id @default(autoincrement())
+  firstName                                         String         @db.VarChar(255)
+  lastName                                          String         @db.VarChar(255)
+  address                                           String         @db.VarChar(255)
+  Cars                                              Cars[]
+  Transactions_OwnersToTransactions_newOwnerId      Transactions[] @relation("OwnersToTransactions_newOwnerId")
+  Transactions_OwnersToTransactions_previousOwnerId Transactions[] @relation("OwnersToTransactions_previousOwnerId")
+}
+
+model Cars {
+  id             Int            @id @default(autoincrement())
+  manufacturer   String         @db.VarChar(255)
+  type           String         @db.VarChar(255)
+  model          String         @db.VarChar(255)
+  mainImageURL   String         @db.VarChar(255)
+  VIN            String         @db.VarChar(255)
+  licence        String         @db.VarChar(255)
   price          Int
   mileage        Int
   MPG            Int
-  engineSize     Int
   capacity       Int
   doors          Int
   currentOwnerId Int?
   leadMechanicId Int?
   garageId       Int
-  Owners         Owners?       @relation(fields: [currentOwnerId], references: [id])
-  Garage         Garage        @relation(fields: [garageId], references: [id])
-  LeadMechanic   LeadMechanic? @relation(fields: [leadMechanicId], references: [id])
-  Transaction    Transaction[]
+  engineSize     Float?         @db.Real
+  Owners         Owners?        @relation(fields: [currentOwnerId], references: [id])
+  Garages        Garages        @relation(fields: [garageId], references: [id])
+  LeadMechanics  LeadMechanics? @relation(fields: [leadMechanicId], references: [id])
+  Transactions   Transactions[]
 }
 
-model Garage {
+model Garages {
   id        Int    @id @default(autoincrement())
   name      String @db.VarChar(255)
   address   String @db.VarChar(255)
   specialty String @db.VarChar(255)
-  Car       Car[]
+  Cars      Cars[]
 }
 
-model LeadMechanic {
+model LeadMechanics {
   id        Int    @id @default(autoincrement())
   firstName String @db.VarChar(255)
   lastName  String @db.VarChar(255)
-  Car       Car[]
+  Cars      Cars[]
 }
 
-model Owners {
-  id                                              Int           @id @default(autoincrement())
-  firstName                                       String        @db.VarChar(255)
-  lastName                                        String        @db.VarChar(255)
-  address                                         String        @db.VarChar(255)
-  Car                                             Car[]
-  Transaction_OwnersToTransaction_newOwnerId      Transaction[] @relation("OwnersToTransaction_newOwnerId")
-  Transaction_OwnersToTransaction_previousOwnerId Transaction[] @relation("OwnersToTransaction_previousOwnerId")
-}
-
-model Transaction {
-  id                                         Int      @id @default(autoincrement())
-  transactionDate                            DateTime @db.Date
-  price                                      Int
-  carId                                      Int?
-  previousOwnerId                            Int?
-  newOwnerId                                 Int?
-  Car                                        Car?     @relation(fields: [carId], references: [id])
-  Owners_OwnersToTransaction_newOwnerId      Owners?  @relation("OwnersToTransaction_newOwnerId", fields: [newOwnerId], references: [id])
-  Owners_OwnersToTransaction_previousOwnerId Owners?  @relation("OwnersToTransaction_previousOwnerId", fields: [previousOwnerId], references: [id])
+model Transactions {
+  id                                          Int      @id @default(autoincrement())
+  transactionDate                             DateTime @db.Date
+  price                                       Int
+  carId                                       Int?
+  previousOwnerId                             Int?
+  newOwnerId                                  Int?
+  Cars                                        Cars?    @relation(fields: [carId], references: [id])
+  Owners_OwnersToTransactions_newOwnerId      Owners?  @relation("OwnersToTransactions_newOwnerId", fields: [newOwnerId], references: [id])
+  Owners_OwnersToTransactions_previousOwnerId Owners?  @relation("OwnersToTransactions_previousOwnerId", fields: [previousOwnerId], references: [id])
 }

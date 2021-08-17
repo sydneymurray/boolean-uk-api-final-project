@@ -2,7 +2,7 @@ let prisma = require("../../utilities/connectDB")
 
 function createOne(req, res){
   let car = {...req.body}
-  prisma.car.create({data: car})
+  prisma.cars.create({data: car})
     .then(dbResponse => res.json(dbResponse))
   }
 
@@ -15,7 +15,9 @@ function retrieveAll(req, res){
 function retrieveOne(req, res){
   let id = Number(req.params.id)
   if (id - id !== 0) res.json({msg:"Page Not Found"})
-  prisma.cars.findUnique({where: {id}})
+  prisma.cars.findUnique({
+    include: {Owners: true, LeadMechanics: true, Garages: true},
+    where: {id}})
     .then(dbResponse => res.json(dbResponse))
 }
 
