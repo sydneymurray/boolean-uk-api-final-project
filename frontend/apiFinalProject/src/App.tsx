@@ -13,8 +13,11 @@ function App() {
         <Route path="/home">
           <HomePage/>
         </Route>
-        <Route path="/">
+        <Route path="/" exact>
         <Redirect to="/home"/>
+        </Route>
+        <Route  path="/buy">
+          <h1>Buy</h1>
         </Route>
       </Switch>
 

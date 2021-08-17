@@ -28,7 +28,7 @@ function Header({className}){
 export default styled(Header)`
 
 margin-top: 20px;
-
+border-bottom: 1px solid lightgrey;
 
 
 h1{
@@ -41,6 +41,7 @@ h1{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     padding: 10px;
+
 
 }
 

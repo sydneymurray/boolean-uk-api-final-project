@@ -2,6 +2,13 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+.mainContent {
+  scroll-snap-type: y mandatory;
+  overflow: scroll;
+  height: calc(100vh - 70px);
 }
 
 .container-80 {
@@ -13,4 +20,9 @@
 .carousel {
   width: 80%;
   place-self: center;
+}
+
+section {
+  scroll-snap-align: center;
+  height: calc(100vh - 70px);
 }

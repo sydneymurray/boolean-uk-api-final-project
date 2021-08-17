@@ -10,7 +10,7 @@ function HomePageImage({className}){
               <img src="/src/images/afordmustang.jpeg" alt="HomepageImage" />
               <div>
               <h2>Buy Or Sell With Great Prices</h2>
-              <FaChevronDown className={"icon"}/>
+              <a href="#stock" className={"icon"}><FaChevronDown /></a>
               </div>
              
               
@@ -22,7 +22,6 @@ function HomePageImage({className}){
 export default styled(HomePageImage)`
 position: relative;
 display: grid;
-height: calc(100vh - 70px);
 
 
 
