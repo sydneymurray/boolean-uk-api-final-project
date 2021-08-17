@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Car {
+  id             Int           @id @default(autoincrement())
+  manufacturer   String        @db.VarChar(255)
+  type           String        @db.VarChar(255)
+  model          String        @db.VarChar(255)
+  mainImageURL   String        @db.VarChar(255)
+  VIN            String        @db.VarChar(255)
+  licence        String        @db.VarChar(255)
+  price          Int
+  mileage        Int
+  MPG            Int
+  engineSize     Int
+  capacity       Int
+  doors          Int
+  currentOwnerId Int?
+  leadMechanicId Int?
+  garageId       Int
+  Owners         Owners?       @relation(fields: [currentOwnerId], references: [id])
+  Garage         Garage        @relation(fields: [garageId], references: [id])
+  LeadMechanic   LeadMechanic? @relation(fields: [leadMechanicId], references: [id])
+  Transaction    Transaction[]
+}
+
+model Garage {
+  id        Int    @id @default(autoincrement())
+  name      String @db.VarChar(255)
+  address   String @db.VarChar(255)
+  specialty String @db.VarChar(255)
+  Car       Car[]
+}
+
+model LeadMechanic {
+  id        Int    @id @default(autoincrement())
+  firstName String @db.VarChar(255)
+  lastName  String @db.VarChar(255)
+  Car       Car[]
+}
+
+model Owners {
+  id                                              Int           @id @default(autoincrement())
+  firstName                                       String        @db.VarChar(255)
+  lastName                                        String        @db.VarChar(255)
+  address                                         String        @db.VarChar(255)
+  Car                                             Car[]
+  Transaction_OwnersToTransaction_newOwnerId      Transaction[] @relation("OwnersToTransaction_newOwnerId")
+  Transaction_OwnersToTransaction_previousOwnerId Transaction[] @relation("OwnersToTransaction_previousOwnerId")
+}
+
+model Transaction {
+  id                                         Int      @id @default(autoincrement())
+  transactionDate                            DateTime @db.Date
+  price                                      Int
+  carId                                      Int?
+  previousOwnerId                            Int?
+  newOwnerId                                 Int?
+  Car                                        Car?     @relation(fields: [carId], references: [id])
+  Owners_OwnersToTransaction_newOwnerId      Owners?  @relation("OwnersToTransaction_newOwnerId", fields: [newOwnerId], references: [id])
+  Owners_OwnersToTransaction_previousOwnerId Owners?  @relation("OwnersToTransaction_previousOwnerId", fields: [previousOwnerId], references: [id])
+}
