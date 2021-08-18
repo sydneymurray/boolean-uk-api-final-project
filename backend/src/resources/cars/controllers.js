@@ -36,6 +36,7 @@ function updateOne(req, res){
 
 function searchAll(req, res){
   let criteria = req.query.criteria
+  console.log(criteria)
    prisma.cars.findMany({
     where: {OR:[ 
       {manufacturer: {contains: criteria, mode: 'insensitive'}}, 
