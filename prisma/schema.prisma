@@ -18,26 +18,29 @@ model Owners {
 }
 
 model Cars {
-  id             Int            @id @default(autoincrement())
-  manufacturer   String         @db.VarChar(255)
-  type           String         @db.VarChar(255)
-  model          String         @db.VarChar(255)
-  mainImageURL   String         @db.VarChar(255)
-  VIN            String         @db.VarChar(255)
-  licence        String         @db.VarChar(255)
-  price          Int
-  mileage        Int
-  MPG            Int
-  capacity       Int
-  doors          Int
-  currentOwnerId Int?
-  leadMechanicId Int?
-  garageId       Int
-  engineSize     Float?         @db.Real
-  Owners         Owners?        @relation(fields: [currentOwnerId], references: [id])
-  Garages        Garages        @relation(fields: [garageId], references: [id])
-  LeadMechanics  LeadMechanics? @relation(fields: [leadMechanicId], references: [id])
-  Transactions   Transactions[]
+  id              Int            @id @default(autoincrement())
+  manufacturer    String         @db.VarChar(255)
+  type            String         @db.VarChar(255)
+  model           String         @db.VarChar(255)
+  mainImageURL    String         @db.VarChar(255)
+  VIN             String         @db.VarChar(255)
+  licence         String         @db.VarChar(255)
+  price           Int
+  mileage         Int
+  MPG             Int
+  capacity        Int
+  doors           Int
+  currentOwnerId  Int?
+  leadMechanicId  Int?
+  garageId        Int
+  engineSize      Float?         @db.Real
+  infoURL         String?        @db.VarChar(255)
+  manufactureDate DateTime?      @db.Date
+  MOT             DateTime?      @db.Date
+  Owners          Owners?        @relation(fields: [currentOwnerId], references: [id])
+  Garages         Garages        @relation(fields: [garageId], references: [id])
+  LeadMechanics   LeadMechanics? @relation(fields: [leadMechanicId], references: [id])
+  Transactions    Transactions[]
 }
 
 model Garages {
