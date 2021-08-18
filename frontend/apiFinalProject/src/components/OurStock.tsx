@@ -68,9 +68,10 @@ export default styled(OurStock)`
 display: grid;
 grid-template-rows: 40px 1fr 1fr;
 grid-gap: 20px;
-background-color: lightgrey;
+background-color: var(--blue);
 padding: 30px;
 place-items: center;
+color: white;
 h2{
     text-align: center;
 }
@@ -95,7 +96,10 @@ h2{
 }
 
 .card{
-    border: 1px solid black;
+    box-shadow: 0 4px 8px 0 rgba(255,255,255,0.2);
+  transition: 0.3s;
+
+  border-radius: 5px;
     height: 300px;
     border-radius: 5px;
     display: grid;
@@ -103,6 +107,11 @@ h2{
 
 
 }
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(255,255,255,0.2);
+  }
+  
 
 .stockCardImg{
    width: 100%;

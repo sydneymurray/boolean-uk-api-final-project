@@ -18,7 +18,7 @@ export default styled(AboutUs)`
 
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-
+grid-gap: 30px;
 place-content: center;
 width: 80%;
 margin-left: auto;

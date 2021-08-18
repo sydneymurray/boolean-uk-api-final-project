@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { HeaderButton } from "./HeaderButton";
+import {FaCarAlt} from "react-icons/fa"
 
 
 function Header({className}){
     return(
         <header className={className}>
             <div className={"container-80 headerContainer"}>
-            <h1>Cars Direct</h1>
+                <div className="logo">
+            <h1>Cars Direct </h1>
+            <FaCarAlt className="icon"/>
+            </div>
             <nav>
                 <ul>
                     <li><HeaderButton to="/Buy">Buy</HeaderButton></li>
@@ -27,7 +31,8 @@ function Header({className}){
 
 export default styled(Header)`
 
-margin-top: 20px;
+
+
 border-bottom: 1px solid lightgrey;
 
 
@@ -35,6 +40,24 @@ h1{
    place-self: start;
    align-self: center;
    font-size: 1.5rem;
+   color: var(--blue);
+}
+
+.logo{
+    display: grid;
+    grid-template-columns: 135px 20px;
+}
+
+.icon{
+    font-size: 1.5rem;
+    color: var(--blue);
+    place-self: start;
+    align-self: center;
+    
+}
+
+.icon :hover {
+    color: #E8810C;
 }
 
 .headerContainer{
