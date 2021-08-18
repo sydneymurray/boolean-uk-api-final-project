@@ -16,7 +16,9 @@ function retrieveOne(req, res){
   let id = Number(req.params.id)
   if (id - id !== 0) res.json({msg:"Page Not Found"})
   prisma.transactions.findUnique({
-    include:{Cars: true},
+    include:{Cars: true, 
+      Owners_OwnersToTransactions_newOwnerId: true,
+      Owners_OwnersToTransactions_previousOwnerId: true},
     where: {id}})
     .then(dbResponse => res.json(dbResponse))
 }
@@ -34,6 +36,27 @@ function updateOne(req, res){
     .then(dbResponse => res.json(dbResponse))
 }
 
-module.exports = {createOne, retrieveAll, retrieveOne, deleteOne, updateOne}
+function showOwner(req, res){
+  let id = Number(req.params.id)
+  prisma.transactions.findMany({
+    include:{Cars: true, 
+      Owners_OwnersToTransactions_newOwnerId: true,
+      Owners_OwnersToTransactions_previousOwnerId: true}, 
+    where: {OR: [{ previousOwnerId: id}, {newOwnerId: id}]},
+    orderBy: {transactionDate: "asc"}})
+    .then(dbResponse => res.json(dbResponse))
+}
+
+function showCar(req, res){
+  let id = Number(req.params.id)
+  prisma.transactions.findMany({
+    include:{Cars: true, 
+      Owners_OwnersToTransactions_newOwnerId: true,
+      Owners_OwnersToTransactions_previousOwnerId: true}, 
+    where: {carId: id},
+    orderBy: {transactionDate: "asc"}})
+    .then(dbResponse => res.json(dbResponse))
+}
+module.exports = {createOne, retrieveAll, retrieveOne, deleteOne, updateOne, showOwner, showCar}
 
 

@@ -34,6 +34,17 @@ function updateOne(req, res){
     .then(dbResponse => res.json(dbResponse))
 }
 
-module.exports = {createOne, retrieveAll, retrieveOne, deleteOne, updateOne}
+function searchAll(req, res){
+  let criteria = req.query.criteria
+  prisma.owners.findMany({
+    where: {OR:[ 
+      {address: {contains: criteria, mode: 'insensitive'}}, 
+      {firstName: {contains: criteria, mode: 'insensitive'}}, 
+	    {lastName: {contains: criteria, mode: 'insensitive'}}]}, 
+    orderBy: {lastName: "asc"}})
+    .then(dbResponse => res.json(dbResponse))
+}
+
+module.exports = {createOne, retrieveAll, retrieveOne, deleteOne, updateOne, searchAll}
 
 
