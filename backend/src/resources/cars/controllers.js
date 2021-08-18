@@ -1,7 +1,7 @@
 let prisma = require("../../utilities/connectDB")
 
 function createOne(req, res){
-  let car = {...req.body}
+  let car = {...req.body, manufactureDate: new Date(req.body.manufactureDate), MOT: new Date(req.body.MOT)}
   prisma.cars.create({data: car})
     .then(dbResponse => res.json(dbResponse))
   }
@@ -29,7 +29,7 @@ function deleteOne(req, res){
 
 function updateOne(req, res){
   let id = Number(req.params.id)
-  let car = req.body
+  let car = {...req.body, manufactureDate: new Date(req.body.manufactureDate), MOT: new Date(req.body.MOT)}
   prisma.cars.update({where: {id}, data: car})
     .then(dbResponse => res.json(dbResponse))
 }
