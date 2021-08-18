@@ -28,15 +28,18 @@ function OurStockBuyPage({className}){
 
 export default styled(OurStockBuyPage)`
 
-padding-top: 60px;
-
+margin-top: 60px;
+padding-top: 10px;
 overflow: scroll;
-width: 90vw;
+width: 100vw;
 margin-left: auto;
 margin-right: auto;
 text-align: center;
 display: grid;
 grid-template-rows: 50px 1fr;
+background-color: var(--blue);
+color: white;
+place-content: center;
 
 h2{
     font-size: 2rem;
@@ -55,20 +58,27 @@ h2{
 
 .card {
     scroll-snap-align: center;
-
+    box-shadow: 0 4px 8px 0 rgba(255,255,255,0.2);
+    transition: 0.3s;
+  
+    border-radius: 5px;
     
     grid-gap: 20px;
-    border: 1px solid lightgrey;
+    
     position: relative;
    display: grid;
    
 
     
 }
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(255,255,255,0.2);
+  }
 .card img{
     width: 100%;
     height: 100%;
     z-index: 3;
+    border-radius: 5px;
 }
 
 .productInformation{

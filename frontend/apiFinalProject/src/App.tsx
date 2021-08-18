@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import HomePage from './pages/HomePage'
 import BuyPage from './pages/BuyPage'
+import ProductPage from "./pages/ProductPage"
 import {Redirect, Route, Switch} from "react-router"
 
 import './App.css'
@@ -19,6 +20,9 @@ function App() {
         </Route>
         <Route  path="/buy">
           <BuyPage/>
+        </Route>
+        <Route path="/product">
+          <ProductPage/>
         </Route>
       </Switch>
 

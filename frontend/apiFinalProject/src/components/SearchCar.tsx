@@ -36,6 +36,7 @@ height: calc(100vh - 175px);
 
 h2{
     font-size: 2.5rem;
+    color: var(--blue);
 }
 
 .searchBarSection{
@@ -59,5 +60,7 @@ form{
 button{
     border-radius: 10px;
    border: 1px solid lightgrey;
+   background-color: #E8810C;
+   color: white;
 }
 `

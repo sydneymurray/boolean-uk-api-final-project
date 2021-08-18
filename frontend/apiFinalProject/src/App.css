@@ -3,6 +3,8 @@
   margin: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  --blue: #2c5585;
+  font-family: sans-serif;
 }
 
 .mainContent {
