@@ -2,9 +2,28 @@ import React from "react";
 import styled from "styled-components";
 import { HeaderButton } from "./HeaderButton";
 import {FaCarAlt} from "react-icons/fa"
+import {useLocation} from "react-router-dom"
 
 
 function Header({className}){
+
+    const location = useLocation();
+    const pathLocation = location.pathname
+    const locationHome = isTheLocationHome()
+
+    function isTheLocationHome(){
+        let locationHome = null;
+
+        if(pathLocation != "/home"){
+            return locationHome = true
+        }
+        else{
+            return locationHome
+        }
+    }
+    
+
+
     return(
         <header className={className}>
             <div className={"container-80 headerContainer"}>
@@ -14,7 +33,7 @@ function Header({className}){
             </div>
             <nav>
                 <ul>
-                    <li><HeaderButton to="/Buy">Buy</HeaderButton></li>
+                    <li>{locationHome ? <HeaderButton  to="/home">Home</HeaderButton> : <HeaderButton  to="/Buy">Buy</HeaderButton> } </li>
                     <li><HeaderButton to="/Sell">Sell</HeaderButton></li>
                     <li><HeaderButton className={"padding30"} to="/Exchange">Exchange</HeaderButton></li>
                 </ul>

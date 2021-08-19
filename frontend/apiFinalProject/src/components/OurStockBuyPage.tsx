@@ -1,14 +1,28 @@
 import React from "react";
 import styled from "styled-components"
+import {useHistory} from "react-router-dom"
 
 function OurStockBuyPage({className}){
+
+    const history = useHistory()
+
+    function userClick(e){
+        const id = e.target.alt
+       history.push(`/product/${id}`)
+
+    }
+
+
+
     return(
        <section className={className}
        >
            <h2>Our Stock</h2>
            <div className="stockContainer">
-               <div className="card">
-                   <img src="/src/images/afordmustang.jpeg" alt="buyPageProduct" />
+            
+               <a className="card" onClick={userClick} >
+                
+                   <img src="/src/images/afordmustang.jpeg" alt="mustang" />
                    <div className="productInformation">
                    <p>Car Model</p>
                    <p>Miles</p>
@@ -16,7 +30,7 @@ function OurStockBuyPage({className}){
                    <p>Price</p>
                    </div>
                  
-               </div>
+               </a>
                <div className="card">1</div>
                <div className="card">1</div>
                <div className="card">1</div>
@@ -80,6 +94,8 @@ h2{
     z-index: 3;
     border-radius: 5px;
 }
+
+
 
 .productInformation{
     position: absolute;
