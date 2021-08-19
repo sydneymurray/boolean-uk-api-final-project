@@ -31,6 +31,11 @@ display: grid;
     place-self: center;
 }
 
+.icon:hover{
+  color: #E8810C;
+ 
+}
+
 
 
 img{

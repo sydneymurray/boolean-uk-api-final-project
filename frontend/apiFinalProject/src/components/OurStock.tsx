@@ -1,19 +1,36 @@
 import React from "react";
 import styled from "styled-components"
 import {FaStar} from "react-icons/fa"
+import {useHistory} from "react-router-dom"
 
 
 
 function OurStock({className}){
+
+    const history = useHistory()
+
+    function userClick(e){
+        
+        const id = e.target.alt
+
+        history.push(`/product/${id}`)
+        
+    }
+
+
+
+
+
+
     return (
         <section className={className} id="stock">
             <h2>Our Stock</h2>
            <div className="slider">
                <div className="child">
-                   <div className="card">
-                       <img src="/src/images/afordmustang.jpeg" alt="stock" className="stockCardImg"/>
+                   <a className="card" onClick={userClick} >
+                       <img src="/src/images/afordmustang.jpeg" alt="mustang" className="stockCardImg"/>
                        <h3 className="carPrice">£15000</h3>
-                   </div>
+                   </a>
                </div>
                <div className="child">
                <div className="card"></div>

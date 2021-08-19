@@ -9,6 +9,10 @@ const HeaderButton = styled(Link)`
    
     border-radius: 10px;
     font-size: 1.2rem;
+
+    :hover{
+    color: #E8810C;
+    }
     
     
 
